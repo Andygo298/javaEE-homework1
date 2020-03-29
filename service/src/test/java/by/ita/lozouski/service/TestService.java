@@ -77,4 +77,9 @@ public class TestService {
         double nettoActual = userDao.getByLogin(testName).getSalary();
         assertEquals(nettoExp, nettoActual);
     }
+    /*
+     * фыв
+     * фыв
+     * для ветви коммент
+     * */
 }
