@@ -70,4 +70,5 @@
             </plugin>
         </plugins>
     </build>
+    <!-->для ветки cancel чтобы отклонить пулреквест<-->
 </project>
