@@ -43,7 +43,7 @@ public class DefaultUserDao implements UserDao {
         this.userByLogin.putIfAbsent(newUser1.getLogin(), newUser1);
     }
 
-    private User modifyBeforeSave(User newUser) {
+    public User modifyBeforeSave(User newUser) {
         final int id = this.userId.incrementAndGet();
         newUser.setId(id);
         return newUser;
