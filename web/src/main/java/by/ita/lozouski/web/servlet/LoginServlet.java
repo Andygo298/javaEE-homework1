@@ -19,7 +19,6 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: move to filter
         HttpSession session = req.getSession();
         Object activeUser = session.getAttribute("activeUser");
         if (activeUser == null) {
