@@ -15,8 +15,9 @@ public class TestService {
     LoginServiceInterface loginServiceInterface;
     RegisterServiceInterface registerServiceInterface;
     SalaryInfoService salaryInfoService;
+
     @BeforeEach
-    void init(){
+    void init() {
         userDao = DefaultUserDao.getInstance();
         loginServiceInterface = LoginService.getInstance();
         registerServiceInterface = RegisterService.getInstance();
@@ -24,58 +25,56 @@ public class TestService {
     }
 
     @Test
-    void loginTest(){
+    void loginTest() {
         String testUserName = userDao.getUsers().get(0).getLogin();
         String testUserPassword = userDao.getUsers().get(0).getPassword();
 
-        User expectedUser = loginServiceInterface.login(testUserName,testUserPassword);
+        User expectedUser = loginServiceInterface.login(testUserName, testUserPassword);
         String expUserName = expectedUser.getLogin();
         String expUserPassword = expectedUser.getPassword();
 
-        assertEquals(testUserName, expUserName,"WRONG!");
-        assertEquals(testUserPassword, expUserPassword,"WRONG!");
+        assertEquals(testUserName, expUserName, "WRONG!");
+        assertEquals(testUserPassword, expUserPassword, "WRONG!");
     }
+
     @Test
-    void loginIsNull(){
+    void loginIsNull() {
         String testUserName = "testLogin";
         String testUserPassword = "testPassword";
 
-        User expectedUser = loginServiceInterface.login(testUserName,testUserPassword);
+        User expectedUser = loginServiceInterface.login(testUserName, testUserPassword);
         assertNull(expectedUser);
     }
 
     @Test
-    void registerTest(){
+    void registerTest() {
         String login = "Andrew";
         String password = "123";
         String email = "qwerty@gmail.com";
         registerServiceInterface.register(login, password, email);
         String expUserLogin = userDao.getByLogin(login).getLogin();
-        assertEquals(login,expUserLogin,"WRONG!");
+        assertEquals(login, expUserLogin, "WRONG!");
     }
+
     @Test
-    void salaryCalcTest(){
+    void salaryCalcTest() {
         double brutto = 1000.0;
         double fszn = 35.0;
         double bgs = 0.6;
         double jobTax = 13.0;
         double profUnion = 1.0;
-        SalaryInfo salaryInfo = salaryInfoService.calculateSalary(brutto,fszn,bgs,jobTax,profUnion);
+        SalaryInfo salaryInfo = salaryInfoService.calculateSalary(brutto, fszn, bgs, jobTax, profUnion);
         double nettoExpected = 504.0;
         double nettoActual = salaryInfo.getNetto();
-        assertEquals(nettoExpected,nettoActual,"WRONG!");
+        assertEquals(nettoExpected, nettoActual, "WRONG!");
     }
 
     @Test
-    void setSalaryTest(){
+    void setSalaryTest() {
         String testName = "root";
         double nettoExp = 504.0;
-        salaryInfoService.setUserSalary(testName,nettoExp);
+        salaryInfoService.setUserSalary(testName, nettoExp);
         double nettoActual = userDao.getByLogin(testName).getSalary();
-        assertEquals(nettoExp,nettoActual);
-    }
-    @Test
-    void forPullRequest(){
-        System.out.println("forPullRequest");
+        assertEquals(nettoExp, nettoActual);
     }
 }
