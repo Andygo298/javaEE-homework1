@@ -74,4 +74,8 @@ public class TestService {
         double nettoActual = userDao.getByLogin(testName).getSalary();
         assertEquals(nettoExp,nettoActual);
     }
+    @Test
+    void forPullRequest(){
+        System.out.println("forPullRequest");
+    }
 }
